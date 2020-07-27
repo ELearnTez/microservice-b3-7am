@@ -12,16 +12,28 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 	
 	
-
+	@ExceptionHandler(value = MobileNotFoundException.class)
+	public ResponseEntity<ErrorDetails> handleMobileNotFoundException(MobileNotFoundException ex) {
+		return ResponseEntity
+				.status(HttpStatus.BAD_REQUEST)
+				.body( ErrorDetails
+						.builder()
+						.code(1011)
+						.message(ex.getMessage())
+						.build()
+					);
+	}
 	
 	@ExceptionHandler(value = NullPointerException.class)
 	public ResponseEntity<ErrorDetails> handleNullpiointerException(NullPointerException npe) {
+		npe.printStackTrace();
 		ErrorDetails errorDetails = buildErrorDetails(npe,  1010);		
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorDetails);
 	}
 	
 	@ExceptionHandler(value = Throwable.class)
 	public ResponseEntity<ErrorDetails> handleThrowable(Throwable th) {
+		th.printStackTrace();
 		ErrorDetails errorDetails = buildErrorDetails(th, 1020);	
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorDetails);
 	}

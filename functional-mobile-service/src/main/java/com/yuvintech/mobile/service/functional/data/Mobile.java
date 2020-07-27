@@ -1,4 +1,4 @@
-package com.yuvintech.spring.boot.mobile.service.data;
+package com.yuvintech.mobile.service.functional.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

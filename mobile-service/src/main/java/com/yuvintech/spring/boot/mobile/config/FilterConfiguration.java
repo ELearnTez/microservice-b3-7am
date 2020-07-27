@@ -19,7 +19,6 @@ public class FilterConfiguration {
 	public FilterRegistrationBean<Filter>  configurationFilter(){
 		 FilterRegistrationBean<Filter>  frb = new FilterRegistrationBean<Filter> ();
 		 frb.setFilter(requestTimeLoggingFilter());
-		 frb.setFilter(analyticsFilter());
 		 frb.addUrlPatterns("/*");
 		 return frb;
 	}
@@ -32,10 +31,5 @@ public class FilterConfiguration {
 	}
 	
 	
-	@Bean
-	@Order(value = 2)
-	public AnalyticsFilter analyticsFilter() {
-		return new AnalyticsFilter();
-	}
 
 }
