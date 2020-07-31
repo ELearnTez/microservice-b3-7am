@@ -1,4 +1,4 @@
-package com.yuvintech.spring.boot.country.data;
+package com.yuvintech.msk.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -9,8 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.yuvintech.spring.boot.country.data.City;
-import com.yuvintech.spring.boot.country.data.Country;
+import com.yuvintech.msk.common.dto.City;
+import com.yuvintech.msk.common.dto.Country;
+
 
 
 @Repository

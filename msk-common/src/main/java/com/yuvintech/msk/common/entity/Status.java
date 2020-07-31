@@ -1,4 +1,4 @@
-package com.yuvintech.spring.boot.mobile.entity;
+package com.yuvintech.msk.common.entity;
 
 public enum Status {
 

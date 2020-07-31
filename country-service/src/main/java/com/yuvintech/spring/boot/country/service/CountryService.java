@@ -2,8 +2,8 @@ package com.yuvintech.spring.boot.country.service;
 
 import java.util.List;
 
-import com.yuvintech.spring.boot.country.data.City;
-import com.yuvintech.spring.boot.country.data.Country;
+import com.yuvintech.msk.common.dto.City;
+import com.yuvintech.msk.common.dto.Country;
 
 public interface CountryService {
 

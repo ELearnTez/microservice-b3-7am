@@ -2,19 +2,22 @@ package com.yuvintech.spring.boot.mobile.service;
 
 import java.util.List;
 
-import com.yuvintech.spring.boot.mobile.dto.FilterDto;
-import com.yuvintech.spring.boot.mobile.entity.Mobile;
+import com.yuvintech.msk.common.dto.FilterDto;
+import com.yuvintech.msk.common.dto.MobileDto;
+import com.yuvintech.msk.common.dto.Response;
+import com.yuvintech.msk.common.dto.SaveMobileDto;
+
 
 public interface MobileService {
 
-	public List<Mobile> getAllMobiles(FilterDto filterDto);
+	public Response<List<MobileDto>> getAllMobiles(FilterDto filterDto);
 
-	public Mobile getMobileById(int mobileId);
+	public  Response<MobileDto> getMobileById(int mobileId);
 
-	public List<Mobile> saveMobile(Mobile mobile);
+	public Response<List<MobileDto>> saveMobile(SaveMobileDto saveMobieDto);
 
-	public Mobile updateMobile(Mobile mobile, int mobileId);
+	public Response<MobileDto> updateMobile(MobileDto mobile, int mobileId);
 
-	public void deleteMobile(int mobileId);
+	public Response<Void> deleteMobile(int mobileId);
 	
 }

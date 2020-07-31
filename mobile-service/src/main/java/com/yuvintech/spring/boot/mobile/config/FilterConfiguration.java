@@ -26,7 +26,6 @@ public class FilterConfiguration {
 	@Bean
 	@Order(value = 1)
 	public RequestTimeLoggingFilter requestTimeLoggingFilter() {
-		System.out.println("--------");
 		return new RequestTimeLoggingFilter();
 	}
 	

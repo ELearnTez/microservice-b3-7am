@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yuvintech.spring.boot.country.data.City;
-import com.yuvintech.spring.boot.country.data.Country;
+import com.yuvintech.msk.common.dto.City;
+import com.yuvintech.msk.common.dto.Country;
 import com.yuvintech.spring.boot.country.repository.CountryRepository;
 
 

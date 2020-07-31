@@ -1,4 +1,4 @@
-package com.yuvintech.spring.boot.country.data;
+package com.yuvintech.msk.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,16 +9,15 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Country {
-	
-	private String code;
+public class FilterDto {
 	
 	private String name;
+	 
+    private  double price;
+    
+    private String status;
+    
+    private String lob;
 	
-	private String description;
 	
-	private String region;
-	
-	private long population;
-
 }

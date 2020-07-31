@@ -2,6 +2,8 @@ package com.yuvintech.spring.boot.mobile.service.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yuvintech.spring.boot.mobile.dto.FilterDto;
-import com.yuvintech.spring.boot.mobile.entity.Mobile;
+import com.yuvintech.msk.common.dto.FilterDto;
+import com.yuvintech.msk.common.dto.MobileDto;
+import com.yuvintech.msk.common.dto.Response;
+import com.yuvintech.msk.common.dto.SaveMobileDto;
+import com.yuvintech.spring.boot.mobile.aop.LogExecutionTime;
 import com.yuvintech.spring.boot.mobile.service.MobileService;
+import com.yuvintech.spring.boot.mobile.util.ValidatorUtil;
 
 @RestController
 @RequestMapping("/mobiles")
@@ -26,41 +32,48 @@ public class MobileController {
 	@Autowired
 	private MobileService mobileService;
 	
+	@LogExecutionTime
 	@GetMapping	
-	public List<Mobile> getAllMobiles(FilterDto filterDto){		
+	public Response<List<MobileDto>> getAllMobileDtos(FilterDto filterDto){		
 		return mobileService.getAllMobiles(filterDto);
 	}
 	
+	
+	@LogExecutionTime
 	@GetMapping(value = "/{mobile-id}")
-	public Mobile getMobileById(@PathVariable("mobile-id") int mobileId) {
+	public Response<MobileDto> getMobileDtoById(@PathVariable("mobile-id") int mobileId) {
 	 return mobileService.getMobileById(mobileId);
 	}
 	
+	
+	@LogExecutionTime
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public List<Mobile> saveMobile(@RequestBody Mobile mobile){
-		return mobileService.saveMobile(mobile);
+	public Response<List<MobileDto>> saveMobileDto(@RequestBody @Valid SaveMobileDto saveMobieDto){
+		ValidatorUtil.valdate(saveMobieDto);
+		return mobileService.saveMobile(saveMobieDto);
 	}
 	
-	
+	@LogExecutionTime
 	@PutMapping("/{mobile-id}")
-	public Mobile updateMobile(@RequestBody Mobile mobile, @PathVariable("mobile-id") int mobileId) {
-		return mobileService.updateMobile(mobile, mobileId);
+	public Response<MobileDto> updateMobileDto(@RequestBody MobileDto mobileDto, @PathVariable("mobile-id") int mobileId) {
+		return mobileService.updateMobile(mobileDto, mobileId);
 	}
 	
+	@LogExecutionTime
 	@DeleteMapping("/{mobile-id}")
 	@ResponseStatus(value= HttpStatus.ACCEPTED)
-	public void deleteMobile(@PathVariable("mobile-id") int mobileId) {
-		mobileService.deleteMobile(mobileId);
+	public Response<Void> deleteMobileDto(@PathVariable("mobile-id") int mobileId) {
+		return mobileService.deleteMobile(mobileId);
 	}
 	
 	
 	
 	
 	
-	/*@ExceptionHandler(value = MobileNotFoundException.class)
+	/*@ExceptionHandler(value = MobileDtoNotFoundException.class)
 	//@ResponseStatus(code = HttpStatus.BAD_REQUEST)
-	public ResponseEntity<ErrorDetails> handleMobileNotFoundException(MobileNotFoundException ex) {
+	public ResponseEntity<ErrorDetails> handleMobileDtoNotFoundException(MobileDtoNotFoundException ex) {
 		
 		ErrorDetails errorDetails= new ErrorDetails(1001 , ex.getMessage());
 		

@@ -2,17 +2,16 @@ package com.yuvintech.spring.boot.mobile.repository;
 
 import java.util.List;
 
-
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.event.TransactionPhase;
 
-import com.yuvintech.spring.boot.mobile.entity.LineOfBusiness;
-import com.yuvintech.spring.boot.mobile.entity.Mobile;
-import com.yuvintech.spring.boot.mobile.entity.Status;
+import com.yuvintech.msk.common.entity.LineOfBusiness;
+import com.yuvintech.msk.common.entity.Mobile;
+import com.yuvintech.msk.common.entity.Status;
+
+
 
 
 public interface MobileRepository extends JpaRepository<Mobile, Integer> , JpaSpecificationExecutor<Mobile>{

@@ -8,7 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class RequestTimeLoggingFilter implements Filter{
 
 	@Override
@@ -20,7 +22,7 @@ public class RequestTimeLoggingFilter implements Filter{
 		
 		chain.doFilter(request, response); // DispatcherServlet -> HandlerAdapter -> Controller -> RequestMapping
 		
-		System.out.println("Total Time Taking to process the Requesst :: "+(System.currentTimeMillis() - startTime)+" in MilliSeconds");
+		log.error("Total Time Taking to process the Requesst :: "+(System.currentTimeMillis() - startTime)+" in MilliSeconds");
 		// Post -processing
 		
 	}

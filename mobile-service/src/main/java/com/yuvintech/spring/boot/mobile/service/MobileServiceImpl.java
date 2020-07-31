@@ -3,6 +3,7 @@ package com.yuvintech.spring.boot.mobile.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,10 +16,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.yuvintech.spring.boot.mobile.dto.FilterDto;
-import com.yuvintech.spring.boot.mobile.entity.LineOfBusiness;
-import com.yuvintech.spring.boot.mobile.entity.Mobile;
-import com.yuvintech.spring.boot.mobile.entity.Status;
+import com.yuvintech.msk.common.dto.FilterDto;
+import com.yuvintech.msk.common.dto.MobileDto;
+import com.yuvintech.msk.common.dto.Response;
+import com.yuvintech.msk.common.dto.SaveMobileDto;
+import com.yuvintech.msk.common.entity.LineOfBusiness;
+import com.yuvintech.msk.common.entity.Mobile;
+import com.yuvintech.msk.common.entity.Status;
 import com.yuvintech.spring.boot.mobile.exception.MobileNotFoundException;
 import com.yuvintech.spring.boot.mobile.repository.MobileRepository;
 
@@ -33,7 +37,7 @@ public class MobileServiceImpl implements MobileService {
 	
 	
 	@Override
-	public List<Mobile> getAllMobiles(FilterDto filterDto) {
+	public Response<List<MobileDto>> getAllMobiles(FilterDto filterDto) {
 		
 		final Double priceD  = filterDto.getPrice() <=0.0 ?   null : filterDto.getPrice() ;
 		
@@ -46,7 +50,12 @@ public class MobileServiceImpl implements MobileService {
 													.and(createFilter("price",priceD ))			
 													.and(createFilter("status",statusE ))
 													.and( createFilter("lineOfBusiness",lobE ));	
-		return mobileRepository.findAll(filters);
+		List<MobileDto> mobileList =  mobileRepository.findAll(filters)
+		 				.stream()
+		 				.map(entity -> enityToDTO(entity))
+		 				.collect(Collectors.toList());
+		
+		return Response.<List<MobileDto>>builder().response(mobileList).build();
 		
 		
 		//@Query - Place Holder : Case -1
@@ -94,39 +103,90 @@ public class MobileServiceImpl implements MobileService {
 	
 	
 	@Override
-	public Mobile getMobileById(int mobileId) {
+	public  Response<MobileDto> getMobileById(int mobileId) {
 		
-	Optional<Mobile>	mobile = mobileRepository.findById(mobileId);
+	Optional<Mobile> optionalMobile = mobileRepository.findById(mobileId);
 	
-	mobile.orElseThrow(() ->  new MobileNotFoundException("Mobile Not Found with given MObile Id"));
+	optionalMobile.orElseThrow(() ->  new MobileNotFoundException("Mobile Not Found with given MObile Id"));
 	
-	return mobile.get();
+	MobileDto mobileDto =  enityToDTO(optionalMobile.get());
+	
+	return Response.<MobileDto>builder().response(mobileDto).build();
+	
 	
 	}
 
 	@Transactional
 	@Override
-	public List<Mobile> saveMobile(Mobile mobile) {
+	public Response<List<MobileDto>> saveMobile(SaveMobileDto dto) {
+		String accessoryType = StringUtils.isEmpty(dto.getAccessoryType()) ? "ALL": dto.getAccessoryType();
+				
+		Mobile mobile = Mobile
+				             .builder()
+				             .name(dto.getName())
+				             .countryCode(dto.getCountryCode())
+				             .price(dto.getPrice())
+				             .accessoryType(accessoryType)
+				             .publicationDate(LocalDate.now())
+				             .status(Status.valueOf(dto.getStatus()))
+				             .lineOfBusiness(LineOfBusiness.valueOf(dto.getLineOfBusiness()))
+				             .build();
+		
 		mobile.setPublicationDate(LocalDate.now());
 		mobileRepository.save(mobile); // insert
-		return mobileRepository.findAll();
+		List<MobileDto> mobileList =  mobileRepository.findAll()
+				               .stream()
+				               .map(entity -> enityToDTO(entity))
+				               .collect(Collectors.toList());
+		
+		return Response.<List<MobileDto>>builder().response(mobileList).build();
 	}
 
 	@Transactional
 	@Override
-	public Mobile updateMobile(Mobile mobile, int mobileId) {
+	public Response<MobileDto> updateMobile(MobileDto mobileDto, int mobileId) {
+		Mobile mobile = dtoToEntity(mobileDto);
 		getMobileById(mobileId);
 		mobile.setId(mobileId);
-		mobileRepository.save(mobile);//update
-		return mobile;
+		Mobile dbmobile = mobileRepository.save(mobile);//update
+		MobileDto md = enityToDTO(dbmobile);
+		return Response.<MobileDto>builder().response(md).build();
 	}
 
 	@Transactional
 	@Override
-	public void deleteMobile(int mobileId) {
+	public Response<Void> deleteMobile(int mobileId) {
 		mobileRepository.deleteById(mobileId);
+		return Response.<Void>builder().build();
+	}
+	
+	private Mobile dtoToEntity(MobileDto dto) {
+		return Mobile
+				.builder()
+				.id(dto.getId())
+				.name(dto.getName())
+				.countryCode(dto.getCountryCode())
+				.status(Status.valueOf(dto.getStatus()))
+				.lineOfBusiness(LineOfBusiness.valueOf(dto.getLineOfBusiness()))
+				.publicationDate(dto.getPublicationDate())
+				.price(dto.getPrice())
+				.accessoryType(dto.getAccessoryType())
+				.build();
 	}
 
-	
+	private MobileDto enityToDTO(Mobile entity) {
+		
+		return MobileDto.builder()
+				        .id(entity.getId())
+				        .accessoryType(entity.getAccessoryType())
+				        .price(entity.getPrice())
+				        .countryCode(entity.getCountryCode())
+				        .status(entity.getStatus().name())
+				        .lineOfBusiness(entity.getLineOfBusiness().name())
+				        .name(entity.getName())
+				        .publicationDate(entity.getPublicationDate())
+				        .build();
+		
+	}
 	
 }

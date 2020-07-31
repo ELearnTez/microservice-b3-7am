@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yuvintech.spring.boot.country.data.City;
-import com.yuvintech.spring.boot.country.data.Country;
+import com.yuvintech.msk.common.dto.City;
+import com.yuvintech.msk.common.dto.Country;
 import com.yuvintech.spring.boot.country.service.CountryService;
 
 @RestController
