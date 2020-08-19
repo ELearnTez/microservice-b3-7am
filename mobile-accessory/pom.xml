@@ -3,38 +3,40 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>com.yuvintech.msk</groupId>
 		<artifactId>msk-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath />
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.yuvintech.country.service</groupId>
-	<artifactId>country-service</artifactId>
-	<name>country-service</name>
-	<description>Spring Boot JDBC micro Srvice</description>
 
+
+	<groupId>com.yuvintech.mobile.service.functional</groupId>
+	<artifactId>mobile-accessory</artifactId>
+	<name>mobile-accessory</name>
+	<description>Mobile Accessory Micro Service</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
+
+
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.2.15</version>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-
 
 </project>

@@ -13,7 +13,7 @@ import com.yuvintech.msk.common.dto.Country;
 import com.yuvintech.spring.boot.country.service.CountryService;
 
 @RestController
-@RequestMapping("/country")
+@RequestMapping("/countries")
 public class CountryController {
 	
 	@Autowired
