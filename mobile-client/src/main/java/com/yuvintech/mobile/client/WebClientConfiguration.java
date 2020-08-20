@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
-
+import static org.springframework.web.reactive.function.client.ExchangeFilterFunctions.basicAuthentication;
 import lombok.Builder;
 
 
@@ -28,6 +28,7 @@ public class WebClientConfiguration {
 	public WebClient mobileServiceClient() {
 		return WebClient
 				 .builder()
+				 .filter(basicAuthentication("mobile-service-user","mobile-service-user123"))
 				 .baseUrl(mobileServiceBaseUri)
 				 .build();
 	}
@@ -37,6 +38,7 @@ public class WebClientConfiguration {
 	public WebClient countryServiceClient() {
 		return WebClient
 				 .builder()
+				 .filter(basicAuthentication("country-user", "country-user"))
 				 .baseUrl(countryServiceBaseUri)
 				 .build();
 	}
