@@ -17,6 +17,8 @@ public class MobileClientDto {
 	
 	private int id;
 
+	private int port;
+	
 	private String name;
 
 	private double price;

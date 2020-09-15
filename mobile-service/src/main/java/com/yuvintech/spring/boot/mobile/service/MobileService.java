@@ -20,4 +20,6 @@ public interface MobileService {
 
 	public Response<Void> deleteMobile(int mobileId);
 	
+	public void saveMobileVoid(SaveMobileDto dto);
+	
 }

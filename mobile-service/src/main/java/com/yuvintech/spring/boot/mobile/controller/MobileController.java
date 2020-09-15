@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +28,23 @@ import com.yuvintech.spring.boot.mobile.service.MobileService;
 import com.yuvintech.spring.boot.mobile.service.ThreadLocalUtil;
 import com.yuvintech.spring.boot.mobile.util.ValidatorUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/mobiles")
+@Slf4j
 public class MobileController {
 	
 	
 	@Autowired
 	private MobileService mobileService;
+	
+	@Autowired
+	private Environment environment;
+	
+	
+	@Value("${welcome-message}")
+	private String message1;
 	
 	@LogExecutionTime
 	@GetMapping	
@@ -44,24 +56,13 @@ public class MobileController {
 	@LogExecutionTime
 	@GetMapping(value = "/{mobile-id}")
 	public Response<MobileDto> getMobileDtoById(@PathVariable("mobile-id") int mobileId) {
-	
-		System.out.println(mobileId+" SUNILMANAKA "+Thread.currentThread().getName());
-		ThreadLocalUtil.setData(mobileId+" SUNILMANAKA "+ Thread.currentThread().getName());
+		log.error("WELCOME MESSAGE using @Value : "+message1);
+		log.error("WELCOME MESSAGE using Environment: "+environment.getProperty("welcome-message"));
+		int port = environment.getProperty("local.server.port", Integer.class);
+	    ThreadLocalUtil.setData(mobileId+" SUNILMANAKA "+ Thread.currentThread().getName());
 		Response<MobileDto> response =  mobileService.getMobileById(mobileId);
-		
-		try {
-			TimeUnit.SECONDS.sleep(4);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		System.out.println(ThreadLocalUtil.getData()+" SUNILMANAKA "+Thread.currentThread().getName());
-		
+		response.getResponse().setPort(port);
 		return response;
-		
-		
 	}
 	
 	

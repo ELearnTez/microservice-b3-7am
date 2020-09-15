@@ -1,3 +1,4 @@
+
 package com.yuvintech.spring.boot.mobile.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,29 +17,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		
-	   http.authorizeRequests()
-	       .anyRequest().hasRole("MOBILE_USER")
-	       .and()
-	       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-	       .and()
-	       .httpBasic();
+
+		http.authorizeRequests().anyRequest().hasRole("MOBILE_USER").and().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic();
 	}
-	
-	
+
 	@Bean
 	public PasswordEncoder passWordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 }

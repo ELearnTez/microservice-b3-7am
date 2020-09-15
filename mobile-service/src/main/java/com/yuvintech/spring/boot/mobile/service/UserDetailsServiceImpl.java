@@ -1,3 +1,4 @@
+
 package com.yuvintech.spring.boot.mobile.service;
 
 import java.util.Optional;
@@ -18,27 +19,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private MobileUserRepository repository;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
-		if(StringUtils.isEmpty(username)) {
+
+		if (StringUtils.isEmpty(username)) {
 			throw new UsernameNotFoundException("User name Should not be Empty ");
 		}
-		
+
 		Optional<MobileUserEntity> dbUser = repository.findByUsername(username);
-		
-		dbUser.orElseThrow(() -> new UsernameNotFoundException("User Not Exists on DB "+username));
-		
-		
-		return User
-				.builder()
-				.username(dbUser.get().getUsername())
-				.password(dbUser.get().getPassword())
-				.disabled(!dbUser.get().getActive())
-				.roles(dbUser.get().getRoles())
-				.build();
-		
+
+		dbUser.orElseThrow(() -> new UsernameNotFoundException("User Not Exists on DB " + username));
+
+		return User.builder().username(dbUser.get().getUsername()).password(dbUser.get().getPassword())
+				.disabled(!dbUser.get().getActive()).roles(dbUser.get().getRoles()).build();
+
 	}
 
 }

@@ -1,10 +1,10 @@
-package com.yuvintech.spring.boot.mobile.service;
+package com.yuvintech.msk.eurekaserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MobileServiceApplicationTests {
+class MskEurekaServerApplicationTests {
 
 	@Test
 	void contextLoads() {

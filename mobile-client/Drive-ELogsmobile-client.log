@@ -1,0 +1,33 @@
+2020-09-04 07:35:40.218  INFO 11344 --- [main] c.y.m.client.MobileClientApplication     : No active profile set, falling back to default profiles: default
+2020-09-04 07:35:50.204  WARN 11344 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2020-09-04 07:35:50.205  INFO 11344 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-09-04 07:35:50.246  WARN 11344 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2020-09-04 07:35:50.247  INFO 11344 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-09-04 07:36:07.320  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2020-09-04 07:36:10.979  INFO 11344 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2020-09-04 07:36:10.981  INFO 11344 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2020-09-04 07:36:11.635  INFO 11344 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2020-09-04 07:36:11.637  INFO 11344 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2020-09-04 07:36:12.729  INFO 11344 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-09-04 07:36:14.120  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2020-09-04 07:36:14.120  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2020-09-04 07:36:14.120  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2020-09-04 07:36:14.123  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2020-09-04 07:36:14.123  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2020-09-04 07:36:14.124  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2020-09-04 07:36:14.124  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2020-09-04 07:36:14.627  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2020-09-04 07:36:14.642  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2020-09-04 07:36:14.646  INFO 11344 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2020-09-04 07:36:14.663  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1599185174656 with initial instances count: 1
+2020-09-04 07:36:14.670  INFO 11344 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1599185174670, current=UP, previous=STARTING]
+2020-09-04 07:36:14.678  INFO 11344 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MOBILE_CLIENT/host.docker.internal:MOBILE_CLIENT: registering service...
+2020-09-04 07:36:14.984  INFO 11344 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MOBILE_CLIENT/host.docker.internal:MOBILE_CLIENT - registration status: 204
+2020-09-04 07:36:19.764  INFO 11344 --- [main] c.y.m.client.MobileClientApplication     : Started MobileClientApplication in 62.837 seconds (JVM running for 67.755)
+2020-09-04 07:36:50.759  WARN 11344 --- [RMI TCP Connection(16)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1599185210759, current=DOWN, previous=UP]
+2020-09-04 07:36:50.760  INFO 11344 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MOBILE_CLIENT/host.docker.internal:MOBILE_CLIENT: registering service...
+2020-09-04 07:36:50.771  INFO 11344 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MOBILE_CLIENT/host.docker.internal:MOBILE_CLIENT - registration status: 204
+2020-09-04 07:36:52.894  INFO 11344 --- [RMI TCP Connection(16)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2020-09-04 07:36:55.902  INFO 11344 --- [RMI TCP Connection(16)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2020-09-04 07:36:55.923  INFO 11344 --- [RMI TCP Connection(16)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MOBILE_CLIENT/host.docker.internal:MOBILE_CLIENT - deregister  status: 200
+2020-09-04 07:36:55.949  INFO 11344 --- [RMI TCP Connection(16)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient

@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 public class MobileDto {
 
 	private int id;
+	
+	private int port;
 
 	private String name;
 

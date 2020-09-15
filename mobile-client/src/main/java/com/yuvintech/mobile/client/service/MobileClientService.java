@@ -2,6 +2,8 @@ package com.yuvintech.mobile.client.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,15 @@ import com.yuvintech.msk.common.dto.MobileAccessoryDto;
 import com.yuvintech.msk.common.dto.MobileClientDto;
 import com.yuvintech.msk.common.dto.MobileDto;
 
+
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
 @Service
 public class MobileClientService {
+	
+	Logger log = LoggerFactory.getLogger(MobileClientService.class);
 	
 	
 	@Autowired
@@ -39,6 +44,9 @@ public class MobileClientService {
 	}
 	
 	private Mono<MobileClientDto> getAllMobileInfo(MobileDto mobile) {
+		
+		log.info("MobileService response : {}", mobile);
+		
 		Mono<Country> monoCountry =  countryServiceIntegration.getCountryInfoByCode(mobile.getCountryCode());
 		 
 		Mono<List<MobileAccessoryDto>> fluxAccessory = mobileAccessoryIntegration
@@ -49,9 +57,12 @@ public class MobileClientService {
 		return zippedResponse.flatMap(tuple -> {
 			 Country country = tuple.getT1();
 			 List<MobileAccessoryDto> accessory = tuple.getT2();
+			 log.info("Country Service response : {}", country);
+			 log.info("MobileAccessory Service response : {}", accessory);
 			 MobileClientDto finalResponse = MobileClientDto
 					                                .builder()
 					                                .id(mobile.getId())
+					                                 .port(mobile.getPort())
 					                                .lineOfBusiness(mobile.getLineOfBusiness())
 					                                .status(mobile.getStatus())
 					                                .name(mobile.getName())
@@ -61,6 +72,7 @@ public class MobileClientService {
 					                                .accessoryInfo(accessory)
 					                                .build();
 			  
+			 log.info("MobileClient Service response : {}", finalResponse);
 			  return Mono.just(finalResponse);
 		  });
 	}

@@ -189,4 +189,25 @@ public class MobileServiceImpl implements MobileService {
 		
 	}
 	
+	
+	public void saveMobileVoid(SaveMobileDto dto) {
+		String accessoryType = StringUtils.isEmpty(dto.getAccessoryType()) ? "ALL": dto.getAccessoryType();
+		// void
+		
+		Mobile mobile = Mobile
+				             .builder()
+				             .name(dto.getName())
+				             .countryCode(dto.getCountryCode())
+				             .price(dto.getPrice())
+				             .accessoryType(accessoryType)
+				             .publicationDate(LocalDate.now())
+				             .status(Status.valueOf(dto.getStatus()))
+				             .lineOfBusiness(LineOfBusiness.valueOf(dto.getLineOfBusiness()))
+				             .build();
+		
+		mobile.setPublicationDate(LocalDate.now());
+		mobileRepository.save(mobile); // insert
+		
+	}
+	
 }
